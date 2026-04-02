@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     llm_model: str = "gpt-4o"
     ncbi_email: str = ""
     ncbi_api_key: str = ""
+    addgene_username: str = ""
+    addgene_password: str = ""
     embedding_dim: int = 384
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
