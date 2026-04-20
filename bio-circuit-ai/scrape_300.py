@@ -37,26 +37,39 @@ IGEM_QUERIES = [
 ]
 
 GENBANK_QUERIES = [
-    "synthetic promoter E. coli",
-    "GFP reporter plasmid",
-    "arsenic biosensor synthetic biology",
-    "fluorescent protein reporter",
-    "transcription factor synthetic biology",
-    "ribosome binding site synthetic",
-    "toggle switch genetic circuit",
-    "repressilator oscillator",
-    "biosensor metal detection",
-    "quorum sensing AHL",
-    "IPTG inducible promoter",
-    "tetracycline repressor",
-    "arabinose promoter pBAD",
-    "T7 promoter expression",
-    "lac operon regulatory",
-    "kill switch toxin antitoxin",
-    "CRISPR Cas9 guide RNA",
-    "codon optimized fluorescent",
-    "sigma factor promoter",
-    "synthetic terminator E. coli",
+    # Explicitly target E. coli K-12 reference features so GenBank returns
+    # authoritative short regulatory sequences, not bulk plasmids from random
+    # teams.
+    "Escherichia coli K-12 MG1655 promoter",
+    "Escherichia coli K-12 sigma70 promoter",
+    "Escherichia coli K-12 constitutive promoter",
+    "Escherichia coli lacI repressor",
+    "Escherichia coli tetR repressor",
+    "Escherichia coli araC regulator",
+    "Escherichia coli merR regulator mercury",
+    "Escherichia coli arsR regulator arsenic",
+    "Escherichia coli cueR regulator copper",
+    "Escherichia coli pBAD arabinose promoter",
+    "Escherichia coli Ptrc Plac Ptet promoter",
+    "Escherichia coli rrnB T1 terminator",
+    "Escherichia coli rho-independent terminator",
+    "Escherichia coli Shine-Dalgarno ribosome binding site",
+    "Escherichia coli T7 RNA polymerase promoter",
+    "pSB1A3 pSB1C3 pSB1K3 plasmid backbone",
+    # Keep a few well-known synthetic/fluorescent terms as a secondary sweep
+    "synthetic constitutive promoter J23100",
+    "GFP mut3 EGFP fluorescent protein reporter",
+    "mCherry TagRFP red fluorescent protein",
+    "arabinose inducible expression",
+]
+
+SYNBIOHUB_QUERIES = [
+    "promoter", "terminator", "rbs",
+    "gfp", "mcherry", "rfp",
+    "anderson promoter", "sigma70",
+    "arsenic biosensor", "mercury biosensor", "copper biosensor",
+    "merR", "arsR", "cueR", "tetR", "lacI", "luxR",
+    "toggle switch", "repressilator",
 ]
 
 UNIPROT_QUERIES = [
@@ -196,6 +209,11 @@ def _capped_addgene(target: int) -> Generator[BioPart, None, None]:
                 logger.warning("Addgene parse failed for %s", eid)
 
 
+def _capped_synbiohub(target: int) -> Generator[BioPart, None, None]:
+    from ingestion.ingest_synbiohub import ingest_synbiohub
+    yield from ingest_synbiohub(queries=SYNBIOHUB_QUERIES, limit=target)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Scrape ~300 parts from each database")
     parser.add_argument("--target", type=int, default=300, help="Target parts per source")
@@ -215,6 +233,7 @@ def main() -> None:
         "GenBank": _capped_genbank,
         "UniProt": _capped_uniprot,
         "Addgene": _capped_addgene,
+        "SynBioHub": _capped_synbiohub,
     }
 
     summary = Table(title=f"Ingestion Summary (target: {target} per source)")
