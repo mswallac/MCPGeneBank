@@ -1,0 +1,216 @@
+{
+  "circuit_name": "NOT Gate (IPTG)",
+  "pattern": "logic_not",
+  "total_sequence_bp": 2337,
+  "num_transcription_units": 2,
+  "num_parts": 8,
+  "parts": [
+    {
+      "transcription_unit": "output_promoter",
+      "role": "promoter",
+      "part_id": "BBa_R0011",
+      "part_name": "PLlacIq Promoter",
+      "type": "promoter",
+      "organism": "Escherichia coli",
+      "function": "Hybrid lac/tet promoter. Repressed by LacI, induced by IPTG.",
+      "sequence_length_bp": 74,
+      "sequence_preview": "AATTGTGAGCGGATAACAATTGACATTGTGAGCGGATAAC...",
+      "full_sequence": "AATTGTGAGCGGATAACAATTGACATTGTGAGCGGATAACAAGATACTGAGCACATCAGCAGGACGCACTGACC",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_R0011"
+    },
+    {
+      "transcription_unit": "output_promoter",
+      "role": "rbs",
+      "part_id": "BBa_B0034",
+      "part_name": "RBS B0034",
+      "type": "rbs",
+      "organism": "Escherichia coli",
+      "function": "Medium-strength ribosome binding site.",
+      "sequence_length_bp": 12,
+      "sequence_preview": "AAAGAGGAGAAA",
+      "full_sequence": "AAAGAGGAGAAA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_B0034"
+    },
+    {
+      "transcription_unit": "output_promoter",
+      "role": "reporter",
+      "part_id": "BBa_E0040",
+      "part_name": "GFP (Green Fluorescent Protein)",
+      "type": "reporter",
+      "organism": "Aequorea victoria",
+      "function": "Green fluorescent protein. Emits at 509 nm.",
+      "sequence_length_bp": 717,
+      "sequence_preview": "ATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAA...",
+      "full_sequence": "ATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_E0040"
+    },
+    {
+      "transcription_unit": "output_promoter",
+      "role": "terminator",
+      "part_id": "BBa_B0015",
+      "part_name": "Double Terminator B0015",
+      "type": "terminator",
+      "organism": "Escherichia coli",
+      "function": "Double transcription terminator (BBa_B0010 + BBa_B0012).",
+      "sequence_length_bp": 129,
+      "sequence_preview": "CCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTG...",
+      "full_sequence": "CCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_B0015"
+    },
+    {
+      "transcription_unit": "input_promoter",
+      "role": "promoter",
+      "part_id": "BBa_R0010",
+      "part_name": "PLlac/ara Promoter",
+      "type": "promoter",
+      "organism": "Escherichia coli",
+      "function": "IPTG-inducible promoter from the lac operon. Repressed by LacI, induced by IPTG.",
+      "sequence_length_bp": 172,
+      "sequence_preview": "CAATACGCAAACCGCCTCTCCCCGCGCGTTGGCCGATTCA...",
+      "full_sequence": "CAATACGCAAACCGCCTCTCCCCGCGCGTTGGCCGATTCATTAATGCAGCTGGCACGACAGGTTTCCCGACTGGAAAGCGGGCAGTGAGCGCAACGCAATTAATGTGAGTTAGCTCACTCATTAGGCACCCCAGGCTTTACACTTTATGCTTCCGGCTCGTATGTTGTGTGG",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_R0010"
+    },
+    {
+      "transcription_unit": "input_promoter",
+      "role": "rbs",
+      "part_id": "BBa_B0034",
+      "part_name": "RBS B0034",
+      "type": "rbs",
+      "organism": "Escherichia coli",
+      "function": "Medium-strength ribosome binding site.",
+      "sequence_length_bp": 12,
+      "sequence_preview": "AAAGAGGAGAAA",
+      "full_sequence": "AAAGAGGAGAAA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_B0034"
+    },
+    {
+      "transcription_unit": "input_promoter",
+      "role": "repressor",
+      "part_id": "BBa_C0012",
+      "part_name": "LacI Repressor",
+      "type": "regulator",
+      "organism": "Escherichia coli",
+      "function": "Lac repressor protein. Binds lac operator and represses transcription. IPTG releases LacI.",
+      "sequence_length_bp": 1092,
+      "sequence_preview": "ATGGTGAATGTGAAACCAGTAACGTTATACGATGTCGCAG...",
+      "full_sequence": "ATGGTGAATGTGAAACCAGTAACGTTATACGATGTCGCAGAGTATGCCGGTGTCTCTTATCAGACCGTTTCCCGCGTGGTGAACCAGGCCAGCCACGTTTCTGCGAAAACGCGGGAAAAAGTGGAAGCGGCGATGGCGGAGCTGAATTACATTCCCAACCGCGTGGCACAACAACTGGCGGGCAAACAGTCGTTGCTGATTGGCGTTGCCACCTCCAGTCTGGCCCTGCACGCGCCGTCGCAAATTGTCGCGGCGATTAAATCTCGCGCCGATCAACTGGGTGCCAGCGTGGTGGTGTCGATGGTAGAACGAAGCGGCGTCGAAGCCTGTAAAGCGGCGGTGCACAATCTTCTCGCGCAACGCGTCAGTGGGCTGATCATTAACTATCCGCTGGATGACCAGGATGCCATTGCTGTGGAAGCTGCCTGCACTAATGTTCCGGCGTTATTTCTTGATGTCTCTGACCAGACACCCATCAACAGTATTATTTTCTCCCATGAAGACGGTACGCGACTGGGCGTGGAGCATCTGGTCGCATTGGGTCACCAGCAAATCGCGCTGTTAGCGGGCCCATTAAGTTCTGTCTCGGCGCGTCTGCGTCTGGCTGGCTGGCATAAATATCTCACTCGCAATCAAATTCAGCCGATAGCGGAACGGGAAGGCGACTGGAGTGCCATGTCCGGTTTTCAACAAACCATGCAAATGCTGAATGAGGGCATCGTTCCCACTGCGATGCTGGTTGCCAACGATCAGATGGCGCTGGGCGCAATGCGCGCCATTACCGAGTCCGGGCTGCGCGTTGGTGCGGATATCTCGGTAGTGGGATACGACGATACCGAAGACAGCTCATGTTATATCCCGCCGTCAACCACCATCAAACAGGATTTTCGCCTGCTGGGGCAAACCAGCGTGGACCGCTTGCTGCAACTCTCTCAGGGCCAGGCGGTGAAGGGCAATCAGCTGTTGCCCGTCTCACTGGTGAAAAGAAAAACCACCCTGGCGCCCAATACGCAAACCGCCTCTCCCCGCGCGTTGGCCGATTCATTAATGCAGCTGGCACGACAGGTTTCCCGACTGGAAAGCGGGCAGTGA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_C0012"
+    },
+    {
+      "transcription_unit": "input_promoter",
+      "role": "terminator",
+      "part_id": "BBa_B0015",
+      "part_name": "Double Terminator B0015",
+      "type": "terminator",
+      "organism": "Escherichia coli",
+      "function": "Double transcription terminator (BBa_B0010 + BBa_B0012).",
+      "sequence_length_bp": 129,
+      "sequence_preview": "CCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTG...",
+      "full_sequence": "CCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_B0015"
+    }
+  ],
+  "transcription_units": [
+    {
+      "unit_id": "output_promoter",
+      "architecture": "PLlacIq Promoter (promoter) \u2192 RBS B0034 (rbs) \u2192 GFP (Green Fluorescent Protein) (reporter) \u2192 Double Terminator B0015 (terminator)",
+      "total_bp": 932,
+      "sequence": "AATTGTGAGCGGATAACAATTGACATTGTGAGCGGATAACAAGATACTGAGCACATCAGCAGGACGCACTGACCAAAGAGGAGAAAATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA"
+    },
+    {
+      "unit_id": "input_promoter",
+      "architecture": "PLlac/ara Promoter (promoter) \u2192 RBS B0034 (rbs) \u2192 LacI Repressor (repressor) \u2192 Double Terminator B0015 (terminator)",
+      "total_bp": 1405,
+      "sequence": "CAATACGCAAACCGCCTCTCCCCGCGCGTTGGCCGATTCATTAATGCAGCTGGCACGACAGGTTTCCCGACTGGAAAGCGGGCAGTGAGCGCAACGCAATTAATGTGAGTTAGCTCACTCATTAGGCACCCCAGGCTTTACACTTTATGCTTCCGGCTCGTATGTTGTGTGGAAAGAGGAGAAAATGGTGAATGTGAAACCAGTAACGTTATACGATGTCGCAGAGTATGCCGGTGTCTCTTATCAGACCGTTTCCCGCGTGGTGAACCAGGCCAGCCACGTTTCTGCGAAAACGCGGGAAAAAGTGGAAGCGGCGATGGCGGAGCTGAATTACATTCCCAACCGCGTGGCACAACAACTGGCGGGCAAACAGTCGTTGCTGATTGGCGTTGCCACCTCCAGTCTGGCCCTGCACGCGCCGTCGCAAATTGTCGCGGCGATTAAATCTCGCGCCGATCAACTGGGTGCCAGCGTGGTGGTGTCGATGGTAGAACGAAGCGGCGTCGAAGCCTGTAAAGCGGCGGTGCACAATCTTCTCGCGCAACGCGTCAGTGGGCTGATCATTAACTATCCGCTGGATGACCAGGATGCCATTGCTGTGGAAGCTGCCTGCACTAATGTTCCGGCGTTATTTCTTGATGTCTCTGACCAGACACCCATCAACAGTATTATTTTCTCCCATGAAGACGGTACGCGACTGGGCGTGGAGCATCTGGTCGCATTGGGTCACCAGCAAATCGCGCTGTTAGCGGGCCCATTAAGTTCTGTCTCGGCGCGTCTGCGTCTGGCTGGCTGGCATAAATATCTCACTCGCAATCAAATTCAGCCGATAGCGGAACGGGAAGGCGACTGGAGTGCCATGTCCGGTTTTCAACAAACCATGCAAATGCTGAATGAGGGCATCGTTCCCACTGCGATGCTGGTTGCCAACGATCAGATGGCGCTGGGCGCAATGCGCGCCATTACCGAGTCCGGGCTGCGCGTTGGTGCGGATATCTCGGTAGTGGGATACGACGATACCGAAGACAGCTCATGTTATATCCCGCCGTCAACCACCATCAAACAGGATTTTCGCCTGCTGGGGCAAACCAGCGTGGACCGCTTGCTGCAACTCTCTCAGGGCCAGGCGGTGAAGGGCAATCAGCTGTTGCCCGTCTCACTGGTGAAAAGAAAAACCACCCTGGCGCCCAATACGCAAACCGCCTCTCCCCGCGCGTTGGCCGATTCATTAATGCAGCTGGCACGACAGGTTTCCCGACTGGAAAGCGGGCAGTGACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA"
+    }
+  ],
+  "regulatory_edges": [
+    {
+      "source": "input_promoter",
+      "target": "inverter_repressor",
+      "interaction": "activates"
+    },
+    {
+      "source": "inverter_repressor",
+      "target": "output_promoter",
+      "interaction": "represses"
+    },
+    {
+      "source": "output_promoter",
+      "target": "output_reporter",
+      "interaction": "activates"
+    }
+  ],
+  "full_sequence": "AATTGTGAGCGGATAACAATTGACATTGTGAGCGGATAACAAGATACTGAGCACATCAGCAGGACGCACTGACCAAAGAGGAGAAAATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATACAATACGCAAACCGCCTCTCCCCGCGCGTTGGCCGATTCATTAATGCAGCTGGCACGACAGGTTTCCCGACTGGAAAGCGGGCAGTGAGCGCAACGCAATTAATGTGAGTTAGCTCACTCATTAGGCACCCCAGGCTTTACACTTTATGCTTCCGGCTCGTATGTTGTGTGGAAAGAGGAGAAAATGGTGAATGTGAAACCAGTAACGTTATACGATGTCGCAGAGTATGCCGGTGTCTCTTATCAGACCGTTTCCCGCGTGGTGAACCAGGCCAGCCACGTTTCTGCGAAAACGCGGGAAAAAGTGGAAGCGGCGATGGCGGAGCTGAATTACATTCCCAACCGCGTGGCACAACAACTGGCGGGCAAACAGTCGTTGCTGATTGGCGTTGCCACCTCCAGTCTGGCCCTGCACGCGCCGTCGCAAATTGTCGCGGCGATTAAATCTCGCGCCGATCAACTGGGTGCCAGCGTGGTGGTGTCGATGGTAGAACGAAGCGGCGTCGAAGCCTGTAAAGCGGCGGTGCACAATCTTCTCGCGCAACGCGTCAGTGGGCTGATCATTAACTATCCGCTGGATGACCAGGATGCCATTGCTGTGGAAGCTGCCTGCACTAATGTTCCGGCGTTATTTCTTGATGTCTCTGACCAGACACCCATCAACAGTATTATTTTCTCCCATGAAGACGGTACGCGACTGGGCGTGGAGCATCTGGTCGCATTGGGTCACCAGCAAATCGCGCTGTTAGCGGGCCCATTAAGTTCTGTCTCGGCGCGTCTGCGTCTGGCTGGCTGGCATAAATATCTCACTCGCAATCAAATTCAGCCGATAGCGGAACGGGAAGGCGACTGGAGTGCCATGTCCGGTTTTCAACAAACCATGCAAATGCTGAATGAGGGCATCGTTCCCACTGCGATGCTGGTTGCCAACGATCAGATGGCGCTGGGCGCAATGCGCGCCATTACCGAGTCCGGGCTGCGCGTTGGTGCGGATATCTCGGTAGTGGGATACGACGATACCGAAGACAGCTCATGTTATATCCCGCCGTCAACCACCATCAAACAGGATTTTCGCCTGCTGGGGCAAACCAGCGTGGACCGCTTGCTGCAACTCTCTCAGGGCCAGGCGGTGAAGGGCAATCAGCTGTTGCCCGTCTCACTGGTGAAAAGAAAAACCACCCTGGCGCCCAATACGCAAACCGCCTCTCCCCGCGCGTTGGCCGATTCATTAATGCAGCTGGCACGACAGGTTTCCCGACTGGAAAGCGGGCAGTGACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA",
+  "explanation": "## NOT Gate (IPTG)\n**Pattern:** Logic Not\n**Organism:** Escherichia coli\n\n### Description\nInverter: output (GFP) is ON when IPTG is absent, OFF when present\n\n### Transcription Units\n- **output_promoter**: PLlacIq Promoter -> RBS B0034 -> GFP (Green Fluorescent Protein) -> Double Terminator B0015 (932 bp)\n- **input_promoter**: PLlac/ara Promoter -> RBS B0034 -> LacI Repressor -> Double Terminator B0015 (1405 bp)\n\n### Regulatory Connections\n- input_promoter --[activates]--> inverter_repressor\n- inverter_repressor --[represses]--> output_promoter\n- output_promoter --[activates]--> output_reporter\n\n### Component Details\n- **input_promoter** (promoter): PLlac/ara Promoter -- IPTG-inducible promoter from the lac operon. Repressed by LacI, induced by IPTG.\n- **inverter_repressor** (repressor): LacI Repressor -- Lac repressor protein. Binds lac operator and represses transcription. IPTG releases LacI.\n- **output_promoter** (promoter): PLlacIq Promoter -- Hybrid lac/tet promoter. Repressed by LacI, induced by IPTG.\n- **output_reporter** (reporter): GFP (Green Fluorescent Protein) -- Green fluorescent protein. Emits at 509 nm.\n\n**Total construct:** ~2337 bp across 2 transcription unit(s)",
+  "references": [
+    "https://parts.igem.org/Part:BBa_R0011",
+    "https://parts.igem.org/Part:BBa_B0034",
+    "https://parts.igem.org/Part:BBa_E0040",
+    "https://parts.igem.org/Part:BBa_B0015",
+    "https://parts.igem.org/Part:BBa_R0010",
+    "https://parts.igem.org/Part:BBa_B0034",
+    "https://parts.igem.org/Part:BBa_C0012",
+    "https://parts.igem.org/Part:BBa_B0015"
+  ],
+  "damp_lab_workflow": {
+    "assembly_method": "Gibson Assembly",
+    "host_organism": "Escherichia coli DH5\u03b1",
+    "backbone_vector": "pSB1C3 (high-copy, chloramphenicol resistance)",
+    "variation_notes": "Logic inverter; same Gibson method as Circuit 1 but different circuit topology and different assay (dose-response transfer function)",
+    "operations": [
+      {
+        "operation": "PCR Amplification",
+        "details": "Amplify TUs with Gibson-overlap primers",
+        "template_DNA": "iGEM Distribution Kit or IDT gBlocks",
+        "polymerase": "Q5 High-Fidelity (NEB)"
+      },
+      {
+        "operation": "Gel Electrophoresis (QC)",
+        "details": "1% agarose gel; verify PCR product sizes"
+      },
+      {
+        "operation": "DpnI Digestion",
+        "details": "Digest template DNA with DpnI (NEB R0176) 1h @ 37\u00b0C to remove original plasmid"
+      },
+      {
+        "operation": "PCR Cleanup",
+        "details": "Monarch PCR & DNA Cleanup Kit (NEB T1030)"
+      },
+      {
+        "operation": "Gibson Assembly",
+        "details": "Assemble linearized backbone + inserts",
+        "reagent": "NEBuilder HiFi DNA Assembly Master Mix (NEB E2621)",
+        "incubation": "50\u00b0C for 60 minutes"
+      },
+      {
+        "operation": "Transformation",
+        "details": "Heat-shock into DH5\u03b1 competent cells",
+        "selection": "LB + chloramphenicol (25 \u00b5g/mL)"
+      },
+      {
+        "operation": "Colony PCR + Sequencing Verification",
+        "details": "Screen colonies with VF2/VR; send positives for Sanger sequencing"
+      },
+      {
+        "operation": "Plasmid Miniprep",
+        "details": "Isolate plasmid from sequence-verified colony"
+      },
+      {
+        "operation": "Functional Assay \u2014 Transfer Function (Dose-Response)",
+        "details": "Measure GFP output across IPTG gradient: 0, 0.01, 0.1, 0.5, 1, 5, 10 mM IPTG. Expect HIGH GFP at 0 IPTG (inverter ON) and LOW GFP at high IPTG (inverter OFF). Plot transfer function curve.",
+        "timepoints": "0, 2, 4, 6, 8 hours post-induction",
+        "controls": "Constitutive GFP (positive max), empty vector (negative)",
+        "instrument": "BioTek Synergy plate reader"
+      }
+    ]
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "circuit_name": "Arsenic Green Fluorescence Biosensor",
+  "pattern": "biosensor",
+  "total_sequence_bp": 1169,
+  "num_transcription_units": 2,
+  "num_parts": 5,
+  "parts": [
+    {
+      "transcription_unit": "sensor",
+      "role": "promoter",
+      "part_id": "BBa_K1031907",
+      "part_name": "Pars Arsenic Sensing Promoter",
+      "type": "promoter",
+      "organism": "Escherichia coli",
+      "function": "Promoter responsive to arsenite ions, repressed by ArsR in the absence of arsenic",
+      "sequence_length_bp": 92,
+      "sequence_preview": "TTGACAAAAAATGGCATCCATTGTCATAAATTTCTTTAAT...",
+      "full_sequence": "TTGACAAAAAATGGCATCCATTGTCATAAATTTCTTTAATCTTGTTCAACAAAATCGATTTTTCCCCTAACACTTGATACTGTATTACAGAA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_K1031907"
+    },
+    {
+      "transcription_unit": "sensor",
+      "role": "rbs",
+      "part_id": "BBa_B0034",
+      "part_name": "RBS B0034",
+      "type": "rbs",
+      "organism": "Escherichia coli",
+      "function": "Medium-strength ribosome binding site.",
+      "sequence_length_bp": 12,
+      "sequence_preview": "AAAGAGGAGAAA",
+      "full_sequence": "AAAGAGGAGAAA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_B0034"
+    },
+    {
+      "transcription_unit": "sensor",
+      "role": "regulator",
+      "part_id": "BBa_K1031311",
+      "part_name": "ArsR Transcription Factor",
+      "type": "regulator",
+      "organism": "Escherichia coli",
+      "function": "Arsenic-responsive transcriptional repressor. Dissociates from Pars in the presence of arsenite.",
+      "sequence_length_bp": 219,
+      "sequence_preview": "ATGAATATCAACATTTCCGTGAATTTAGCCGCCGAAATCA...",
+      "full_sequence": "ATGAATATCAACATTTCCGTGAATTTAGCCGCCGAAATCAGCCTGTTCTCCCCGGAACAGGTAATGGGCCTCGGCAGTGTGCTTGCCGCAATCAAAGAGTTTGGCATCACCCACTGGAGCAGCGACTACACCCACATGCTGAGATCTTCCCGCAGACTGGCGTGCCGCCAGCTTCGCTGTCACGTTTCGTCTGTGAAGTGCACCATAACCCGCAACTGA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_K1031311"
+    },
+    {
+      "transcription_unit": "sensor",
+      "role": "terminator",
+      "part_id": "BBa_B0015",
+      "part_name": "Double Terminator B0015",
+      "type": "terminator",
+      "organism": "Escherichia coli",
+      "function": "Double transcription terminator (BBa_B0010 + BBa_B0012).",
+      "sequence_length_bp": 129,
+      "sequence_preview": "CCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTG...",
+      "full_sequence": "CCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_B0015"
+    },
+    {
+      "transcription_unit": "reporter",
+      "role": "reporter",
+      "part_id": "BBa_E0040",
+      "part_name": "GFP (Green Fluorescent Protein)",
+      "type": "reporter",
+      "organism": "Aequorea victoria",
+      "function": "Green fluorescent protein. Emits at 509 nm.",
+      "sequence_length_bp": 717,
+      "sequence_preview": "ATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAA...",
+      "full_sequence": "ATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAA",
+      "source": "igem",
+      "registry_url": "https://parts.igem.org/Part:BBa_E0040"
+    }
+  ],
+  "transcription_units": [
+    {
+      "unit_id": "sensor",
+      "architecture": "Pars Arsenic Sensing Promoter (promoter) \u2192 RBS B0034 (rbs) \u2192 ArsR Transcription Factor (regulator) \u2192 Double Terminator B0015 (terminator)",
+      "total_bp": 452,
+      "sequence": "TTGACAAAAAATGGCATCCATTGTCATAAATTTCTTTAATCTTGTTCAACAAAATCGATTTTTCCCCTAACACTTGATACTGTATTACAGAAAAAGAGGAGAAAATGAATATCAACATTTCCGTGAATTTAGCCGCCGAAATCAGCCTGTTCTCCCCGGAACAGGTAATGGGCCTCGGCAGTGTGCTTGCCGCAATCAAAGAGTTTGGCATCACCCACTGGAGCAGCGACTACACCCACATGCTGAGATCTTCCCGCAGACTGGCGTGCCGCCAGCTTCGCTGTCACGTTTCGTCTGTGAAGTGCACCATAACCCGCAACTGACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA"
+    },
+    {
+      "unit_id": "reporter",
+      "architecture": "GFP (Green Fluorescent Protein) (reporter)",
+      "total_bp": 717,
+      "sequence": "ATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAA"
+    }
+  ],
+  "regulatory_edges": [
+    {
+      "source": "sensor",
+      "target": "regulator",
+      "interaction": "activates"
+    },
+    {
+      "source": "regulator",
+      "target": "reporter",
+      "interaction": "activates"
+    }
+  ],
+  "full_sequence": "TTGACAAAAAATGGCATCCATTGTCATAAATTTCTTTAATCTTGTTCAACAAAATCGATTTTTCCCCTAACACTTGATACTGTATTACAGAAAAAGAGGAGAAAATGAATATCAACATTTCCGTGAATTTAGCCGCCGAAATCAGCCTGTTCTCCCCGGAACAGGTAATGGGCCTCGGCAGTGTGCTTGCCGCAATCAAAGAGTTTGGCATCACCCACTGGAGCAGCGACTACACCCACATGCTGAGATCTTCCCGCAGACTGGCGTGCCGCCAGCTTCGCTGTCACGTTTCGTCTGTGAAGTGCACCATAACCCGCAACTGACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATAATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAA",
+  "explanation": "## Arsenic Green Fluorescence Biosensor\n**Pattern:** Biosensor\n**Organism:** Escherichia coli\n\n### Description\nBiosensor that detects arsenic and produces green fluorescence\n\n### Transcription Units\n- **sensor**: Pars Arsenic Sensing Promoter -> RBS B0034 -> ArsR Transcription Factor -> Double Terminator B0015 (452 bp)\n- **reporter**: GFP (Green Fluorescent Protein) (717 bp)\n\n### Regulatory Connections\n- sensor --[activates]--> regulator\n- regulator --[activates]--> reporter\n\n### Component Details\n- **sensor** (promoter): Pars Arsenic Sensing Promoter -- Promoter responsive to arsenite ions, repressed by ArsR in the absence of arsenic\n- **regulator** (regulator): ArsR Transcription Factor -- Arsenic-responsive transcriptional repressor. Dissociates from Pars in the presence of arsenite.\n- **reporter** (reporter): GFP (Green Fluorescent Protein) -- Green fluorescent protein. Emits at 509 nm.\n\n**Total construct:** ~1169 bp across 2 transcription unit(s)",
+  "references": [
+    "https://parts.igem.org/Part:BBa_K1031907",
+    "https://parts.igem.org/Part:BBa_B0034",
+    "https://parts.igem.org/Part:BBa_K1031311",
+    "https://parts.igem.org/Part:BBa_B0015",
+    "https://parts.igem.org/Part:BBa_E0040"
+  ],
+  "damp_lab_workflow": {
+    "assembly_method": "Gibson Assembly",
+    "host_organism": "Escherichia coli DH5\u03b1",
+    "backbone_vector": "pSB1C3 (high-copy, chloramphenicol resistance)",
+    "variation_notes": "Simple 2-TU biosensor; Gibson Assembly chosen for seamless joining of 2 fragments",
+    "operations": [
+      {
+        "operation": "PCR Amplification",
+        "details": "Amplify each transcription unit with Gibson-overlap primers (20-40 bp overlaps)",
+        "template_DNA": "iGEM DNA Distribution Kit plates or IDT gBlock synthesis",
+        "primers": "Design 20 bp binding + 20 bp overlap per junction",
+        "polymerase": "Q5 High-Fidelity DNA Polymerase (NEB)",
+        "cycles": "98\u00b0C 30s \u2192 30x(98\u00b0C 10s, 60\u00b0C 30s, 72\u00b0C 30s/kb) \u2192 72\u00b0C 5min"
+      },
+      {
+        "operation": "Gel Electrophoresis (QC)",
+        "details": "Run PCR products on 1% agarose gel to verify correct band sizes",
+        "expected_bands": "TU1 (sensor module) and TU2 (reporter module)"
+      },
+      {
+        "operation": "PCR Cleanup / Gel Extraction",
+        "details": "Monarch PCR & DNA Cleanup Kit (NEB) or gel extract if non-specific bands"
+      },
+      {
+        "operation": "Gibson Assembly",
+        "details": "Combine linearized pSB1C3 backbone + 2 TU inserts in Gibson Assembly Master Mix",
+        "reagent": "NEBuilder HiFi DNA Assembly Master Mix (NEB E2621)",
+        "incubation": "50\u00b0C for 60 minutes",
+        "molar_ratio": "1:2 vector:insert"
+      },
+      {
+        "operation": "Transformation",
+        "details": "Heat-shock transform Gibson product into chemically competent E. coli DH5\u03b1",
+        "competent_cells": "NEB 5-alpha Competent E. coli (NEB C2987)",
+        "protocol": "Thaw on ice 10 min \u2192 add 2 \u00b5L assembly \u2192 ice 30 min \u2192 42\u00b0C 30s \u2192 ice 5 min \u2192 950 \u00b5L SOC \u2192 37\u00b0C 1h \u2192 plate",
+        "selection": "LB + chloramphenicol (25 \u00b5g/mL)"
+      },
+      {
+        "operation": "Colony PCR Screening",
+        "details": "Screen 8-12 colonies with VF2/VR primers to verify insert",
+        "expected_size": "~1169 bp"
+      },
+      {
+        "operation": "Plasmid Miniprep",
+        "details": "Isolate plasmid DNA from positive colonies",
+        "kit": "Monarch Plasmid Miniprep Kit (NEB T1010)"
+      },
+      {
+        "operation": "Functional Assay \u2014 Fluorescence Plate Reader",
+        "details": "Induce with 0, 1, 5, 10, 50 \u00b5M sodium arsenite; measure GFP (ex485/em528) at 0, 2, 4, 6h",
+        "controls": "Empty pSB1C3 (negative), constitutive GFP (positive)",
+        "instrument": "BioTek Synergy plate reader"
+      }
+    ]
+  }
+}
