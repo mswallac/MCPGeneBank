@@ -108,9 +108,34 @@ ADDGENE_QUERIES = [
 
 
 def _capped_igem(target: int) -> Generator[BioPart, None, None]:
-    """Fetch up to `target` unique iGEM parts via the new Registry API."""
-    from ingestion.ingest_igem import ingest_igem
-    yield from ingest_igem(queries=IGEM_QUERIES, limit=target)
+    """Fetch up to `target` unique iGEM parts.
+
+    Two-phase pull:
+      (a) canonical classics by slug (Anderson promoters, B0034 RBS,
+          B0015 terminator, E0040 GFP, canonical TFs/promoters, metal
+          biosensor parts). Guaranteed to be in the DB so downstream
+          LLMs don't hallucinate them when keyword search misses.
+      (b) keyword-based fill to `target`, deduped against (a).
+    """
+    from ingestion.ingest_igem import ingest_igem, ingest_igem_canonical
+
+    seen: set[str] = set()
+    count = 0
+    for p in ingest_igem_canonical():
+        if p.part_id in seen:
+            continue
+        seen.add(p.part_id)
+        count += 1
+        yield p
+        if count >= target:
+            return
+
+    # Remaining budget filled via keyword search, deduping on already-yielded IDs
+    for p in ingest_igem(queries=IGEM_QUERIES, limit=target - count):
+        if p.part_id in seen:
+            continue
+        seen.add(p.part_id)
+        yield p
 
 
 def _capped_genbank(target: int) -> Generator[BioPart, None, None]:
@@ -178,35 +203,12 @@ def _capped_uniprot(target: int) -> Generator[BioPart, None, None]:
 
 
 def _capped_addgene(target: int) -> Generator[BioPart, None, None]:
-    from ingestion.ingest_addgene import search_addgene, _to_biopart
-
-    seen: set[str] = set()
-    count = 0
-    per_query_limit = min(25, target)
-
-    for q in ADDGENE_QUERIES:
-        if count >= target:
-            break
-        logger.info("Addgene query: %s (have %d/%d)", q, count, target)
-        try:
-            entries = search_addgene(q, limit=per_query_limit)
-        except Exception:
-            logger.warning("Addgene search failed for '%s'", q)
-            continue
-
-        for entry in entries:
-            if count >= target:
-                break
-            eid = entry.get("id", "")
-            if eid in seen or not eid:
-                continue
-            seen.add(eid)
-            try:
-                part = _to_biopart(entry)
-                count += 1
-                yield part
-            except Exception:
-                logger.warning("Addgene parse failed for %s", eid)
+    # The addgene ingester was rewritten (commit c4732a3 "addgene and
+    # genoCAD") to scrape via authenticated browsing; public entry point is
+    # now ingest_addgene(). It requires ADDGENE_USERNAME / ADDGENE_PASSWORD
+    # in .env and logs an error + returns empty if credentials are missing.
+    from ingestion.ingest_addgene import ingest_addgene
+    yield from ingest_addgene(queries=ADDGENE_QUERIES, limit=target)
 
 
 def _capped_synbiohub(target: int) -> Generator[BioPart, None, None]:
