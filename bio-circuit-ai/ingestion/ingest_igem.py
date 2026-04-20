@@ -276,6 +276,73 @@ def fetch_part_by_slug(slug: str) -> dict | None:
         return None
 
 
+# Canonical iGEM parts that every synthetic-biology demo assumes is present.
+# Keyword-based scrape queries (in scrape_300.py) return iGEM's newest parts
+# first and bury these well-known classics, so we pull them explicitly by
+# slug. Covers the Anderson constitutive promoter library, standard RBSs,
+# double terminators, classic fluorescent reporters, canonical TFs and
+# their cognate inducible promoters, and the frontline metal-sensing
+# biosensor parts.
+CANONICAL_IGEM_IDS: list[str] = [
+    # Anderson constitutive promoter library (BBa_J23100–J23119)
+    *(f"BBa_J2310{d}" for d in range(10)),
+    *(f"BBa_J2311{d}" for d in range(10)),
+    # Standard RBSs (Salis / Elowitz lineages)
+    "BBa_B0030", "BBa_B0031", "BBa_B0032", "BBa_B0033", "BBa_B0034",
+    # Terminators
+    "BBa_B0010", "BBa_B0012", "BBa_B0015", "BBa_B1006",
+    # Fluorescent reporters
+    "BBa_E0040",   # GFP mut3b
+    "BBa_E1010",   # mRFP1
+    "BBa_E0030",   # EYFP
+    "BBa_I13521",  # RFP+LVA for toggle switches
+    "BBa_K592100", # mCherry codon-optimized
+    # Classic regulators (CDS) and their cognate promoters
+    "BBa_C0012", "BBa_R0010",   # LacI / PLacI
+    "BBa_C0040", "BBa_R0040",   # TetR / PTet
+    "BBa_C0051", "BBa_R0051",   # cI / PcI
+    "BBa_C0061", "BBa_C0062", "BBa_R0062",  # LuxI / LuxR / PLux
+    "BBa_C0080", "BBa_I0500",   # AraC / pBAD
+    # Metal-sensing biosensor parts (arsenic / mercury / copper / lead)
+    "BBa_K4767001",    # Pars (current arsenic-responsive promoter in registry)
+    "BBa_K5060011",    # ArsR protein (UniProt P52144)
+    "BBa_K346001",     # Pmer mercury-responsive promoter (may or may not exist)
+    "BBa_K346002",     # MerR mercury regulator
+    "BBa_J45992",      # PcopA copper-responsive promoter
+]
+
+
+def _id_to_slug(part_id: str) -> str:
+    """iGEM slugs are the `name` lowercased with underscores → hyphens."""
+    return part_id.lower().replace("_", "-")
+
+
+def ingest_igem_canonical() -> Generator[BioPart, None, None]:
+    """Pull a curated list of canonical iGEM parts by slug.
+
+    Bypasses search ranking entirely — each part is fetched directly via
+    its `/parts/slugs/{slug}` endpoint. Pieces that no longer exist in the
+    registry are logged and skipped. All the usual junk/organism filters
+    still apply via _parse_part.
+    """
+    seen: set[str] = set()
+    for pid in CANONICAL_IGEM_IDS:
+        if pid in seen:
+            continue
+        seen.add(pid)
+        slug = _id_to_slug(pid)
+        raw = fetch_part_by_slug(slug)
+        if not raw:
+            logger.info("Canonical iGEM part %s not in registry — skipping", pid)
+            continue
+        part = _parse_part(raw)
+        if part is None:
+            logger.info("Canonical iGEM part %s filtered as junk — skipping", pid)
+            continue
+        yield part
+        time.sleep(0.3)  # keep well under the 5-req/5s short rate limit
+
+
 def _parse_part(raw: dict) -> BioPart | None:
     """Parse a raw iGEM API response into a BioPart. Returns None for junk."""
     name = raw.get("name", "")
