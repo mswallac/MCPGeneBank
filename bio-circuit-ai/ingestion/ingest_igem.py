@@ -166,12 +166,15 @@ _JUNK_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\btranscription\s+unit\b", re.I),
     re.compile(r"\bco-?expresses?\b", re.I),
     # Cassette-style compound names: "... promoter-RBS-X-terminator" etc.
-    # Require hyphen/plus delimiters between part-type words (not bare
-    # spaces) so natural-language descriptions that mention multiple part
-    # types don't get caught.
+    # Require two part-type words directly adjacent to the delimiter (only
+    # whitespace in between). This matches "T5 promoter-RBS-bcsAB" and
+    # "promoter+CDS+terminator" but does NOT false-match single-function
+    # parts whose title/description happens to mention the same part type
+    # twice, e.g. "RBS (Elowitz 1999) -- defines RBS efficiency" (B0034)
+    # or "double terminator (B0010-B0012) Double terminator..." (B0015).
     re.compile(
-        r"\b(?:promoter|rbs|cds|terminator)\b[^\n]{0,40}?[-+]"
-        r"[^\n]{0,40}?\b(?:promoter|rbs|cds|terminator|gene|protein|coding|reporter)\b",
+        r"\b(?:promoter|rbs|cds|terminator)\b\s*[-+]\s*"
+        r"\b(?:promoter|rbs|cds|terminator|gene|reporter)\b",
         re.I,
     ),
     # Tags, scars, fusion helpers — not standalone parts
