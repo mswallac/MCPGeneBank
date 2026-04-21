@@ -109,6 +109,53 @@ def search_parts(
 
 
 @mcp.tool()
+def search_parts_batch(
+    queries: list[dict],
+    limit: int = 5,
+) -> str:
+    """Run several semantic part-searches in a single MCP call.
+
+    Designed to replace multiple sequential `search_parts` invocations when
+    the caller knows all the slots it needs up-front (e.g. "I need top-K
+    candidates for promoter / RBS / CDS / terminator all at once"). Each
+    sub-query is executed with its own `part_type` filter and the same
+    `limit`. Typical savings: one LLM->server round-trip instead of N.
+
+    Args:
+        queries: list of dicts; each dict must contain `query` (str) and
+                 `part_type` (str, one of: promoter, reporter, regulator,
+                 enzyme, terminator, rbs, coding, plasmid, or empty for all).
+                 Optional `label` field is echoed back verbatim so the
+                 caller can correlate each result set with its slot purpose
+                 (e.g. "constitutive_promoter", "arsenic_sensor").
+        limit: Max parts per sub-query (1-20, default 5).
+
+    Returns:
+        JSON with a `results` list — one entry per input query, each with
+        the original `query`, `part_type`, `label`, and a `parts` list.
+    """
+    limit = max(1, min(20, limit))
+    store = _get_store()
+    out = []
+    for q in queries:
+        query = (q or {}).get("query", "") or ""
+        pt = (q or {}).get("part_type", "") or ""
+        label = (q or {}).get("label", "") or ""
+        if not query:
+            out.append({"query": query, "part_type": pt, "label": label, "count": 0, "parts": []})
+            continue
+        hits = store.search(query=query, limit=limit, part_type=pt if pt else None)
+        out.append({
+            "query": query,
+            "part_type": pt or "all",
+            "label": label,
+            "count": len(hits),
+            "parts": [_format_part(r) for r in hits],
+        })
+    return json.dumps({"results": out}, indent=2)
+
+
+@mcp.tool()
 def get_part(part_id: str) -> str:
     """Get full details for a specific biological part, including its complete DNA/protein sequence.
 
