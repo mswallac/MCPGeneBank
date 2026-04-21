@@ -200,7 +200,15 @@ def _is_junk(name: str, title: str, description: str, type_slug: str) -> tuple[b
     reveal themselves in the title (e.g. "X-Y-Z-terminator"), while primers
     often only reveal themselves in the description.
     """
-    if type_slug in {"primer", "cell", "intermediate", "conjugation", "scar", "dna"}:
+    # `device` and `generator` are iGEM's labels for composite cassettes
+    # (promoter+RBS+CDS+terminator packaged as one unit). They describe
+    # themselves with part-type words ("X promoter-Y CDS-..."), which means
+    # naive text-hint classification routes them into atomic-part slots
+    # where they cause biologically-wrong designs. Drop them at ingest.
+    if type_slug in {
+        "primer", "cell", "intermediate", "conjugation", "scar", "dna",
+        "device", "generator",
+    }:
         return True, f"type_slug={type_slug}"
 
     name_blob = f"{name} {title}".lower()
@@ -230,7 +238,15 @@ def _is_junk(name: str, title: str, description: str, type_slug: str) -> tuple[b
 # "inverter" — iGEM teams use these loosely. For these ambiguous slugs we
 # prefer the text-hint classification (e.g. description mentions "promoter")
 # over the slug's default mapping.
-_AMBIGUOUS_SLUGS = {"regulatory", "signalling", "inverter", "device", "generator"}
+#
+# NOT included in the ambiguous list: "device" and "generator". iGEM's `device`
+# type is almost always a composite cassette (promoter + RBS + CDS + terminator
+# packaged into one logical unit), and `generator` is similar. These parts
+# describe themselves with words like "promoter" and "CDS" in their titles
+# because they CONTAIN those elements, not because they ARE those elements.
+# We drop device/generator at the junk-filter step instead so they never land
+# in Qdrant pretending to be atomic parts.
+_AMBIGUOUS_SLUGS = {"regulatory", "signalling", "inverter"}
 
 
 def _classify_type(type_slug: str, text: str) -> PartType:
