@@ -91,8 +91,11 @@ def _to_biopart(raw: dict, ucf_label: str) -> BioPart | None:
     ucf_note = f"Cello {ucf_label} UCF"
     description = f"{ucf_note} characterized {part_type} '{name}' (sequence length {len(seq)} bp)."
 
+    # IDs must not contain colons — Knox's tusSpec parser uses `:` as the
+    # field delimiter between part_id, role, and label. A "cello:X:Y" ID
+    # would get split and mangled into bogus role/label fields.
     return BioPart(
-        part_id=f"cello:{ucf_label}:{name}",
+        part_id=f"cello-{ucf_label}-{name}",
         name=name,
         type=pt,
         organism="Escherichia coli",
