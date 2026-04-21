@@ -223,15 +223,35 @@ def _is_junk(name: str, title: str, description: str, type_slug: str) -> tuple[b
     return False, ""
 
 
+# iGEM's "regulatory" slug is a broad category that covers promoters, operators,
+# inducible elements, etc. — so BBa_K4767001 Pars (an arsenic-responsive promoter)
+# comes back with slug=regulatory and would get typed REGULATOR, which excludes
+# it from part_type=promoter search results. Same for "signalling" and
+# "inverter" — iGEM teams use these loosely. For these ambiguous slugs we
+# prefer the text-hint classification (e.g. description mentions "promoter")
+# over the slug's default mapping.
+_AMBIGUOUS_SLUGS = {"regulatory", "signalling", "inverter", "device", "generator"}
+
+
 def _classify_type(type_slug: str, text: str) -> PartType:
-    pt = SLUG_TYPE_MAP.get(type_slug)
-    if pt and pt != PartType.OTHER:
-        return pt
+    slug_pt = SLUG_TYPE_MAP.get(type_slug)
+
+    # For ambiguous slugs, let text hints win first.
+    if type_slug in _AMBIGUOUS_SLUGS:
+        lower = text.lower()
+        for hint, hpt in TEXT_TYPE_HINTS.items():
+            if hint in lower:
+                return hpt
+        return slug_pt or PartType.OTHER
+
+    # Otherwise the slug is authoritative (promoter/rbs/cds/terminator/etc.).
+    if slug_pt and slug_pt != PartType.OTHER:
+        return slug_pt
     lower = text.lower()
     for hint, hpt in TEXT_TYPE_HINTS.items():
         if hint in lower:
             return hpt
-    return pt or PartType.OTHER
+    return slug_pt or PartType.OTHER
 
 
 def _auto_tag(text: str) -> list[str]:
