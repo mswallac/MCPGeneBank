@@ -136,6 +136,23 @@ def search_parts_batch(
     """
     limit = max(1, min(20, limit))
     store = _get_store()
+
+    def _compact(p: dict) -> dict:
+        """Minimal projection for batch results — skip full sequences and long
+        descriptions so 6-slot batches fit in a reasonable context window.
+        The caller can re-fetch any specific part via `get_part` to inspect
+        the full record."""
+        desc = (p.get("description", "") or "").strip()
+        if len(desc) > 140:
+            desc = desc[:140].rstrip() + "…"
+        return {
+            "part_id": p.get("part_id", ""),
+            "name": p.get("name", ""),
+            "type": p.get("type", ""),
+            "organism": p.get("organism", ""),
+            "description": desc,
+        }
+
     out = []
     for q in queries:
         query = (q or {}).get("query", "") or ""
@@ -150,7 +167,7 @@ def search_parts_batch(
             "part_type": pt or "all",
             "label": label,
             "count": len(hits),
-            "parts": [_format_part(r) for r in hits],
+            "parts": [_compact(r) for r in hits],
         })
     return json.dumps({"results": out}, indent=2)
 
