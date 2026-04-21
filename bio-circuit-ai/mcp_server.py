@@ -196,6 +196,56 @@ def get_part(part_id: str) -> str:
 
 
 @mcp.tool()
+def get_parts_batch(part_ids: list[str]) -> str:
+    """Fetch full details (including DNA/protein sequence) for a LIST of parts
+    in one round-trip. Designed for downstream sequence-assembly workflows
+    where a caller (e.g. Knox's getDesignSequences tool) has a fixed set
+    of part IDs from an enumerated design and wants all their sequences
+    at once.
+
+    Unlike `get_part`, this uses an exact-ID scroll-filter on the Qdrant
+    payload (no vector search), so results are deterministic and fast.
+
+    Args:
+        part_ids: list of part identifiers (e.g. 'BBa_E0040', 'P52144',
+                  'cello-Eco1C1G1T1-B3').
+
+    Returns:
+        JSON with a `results` map keyed by part_id. Each value has
+        {part_id, name, type, organism, sequence, sequence_length}.
+        Missing IDs are listed separately under `missing`.
+    """
+    from qdrant_client.models import Filter, FieldCondition, MatchAny
+
+    store = _get_store()
+    ids = [pid for pid in (part_ids or []) if pid]
+    if not ids:
+        return json.dumps({"results": {}, "missing": []})
+
+    # Single scroll with MatchAny — one Qdrant round-trip for the whole batch.
+    try:
+        points, _ = store.client.scroll(
+            collection_name=store.collection,
+            scroll_filter=Filter(must=[FieldCondition(key="part_id", match=MatchAny(any=ids))]),
+            limit=len(ids) + 16,
+            with_payload=True,
+        )
+    except Exception as e:
+        return json.dumps({"error": f"scroll failed: {e}", "results": {}, "missing": ids})
+
+    found: dict[str, dict] = {}
+    for pt in points:
+        p = pt.payload or {}
+        pid = p.get("part_id", "")
+        if not pid or pid in found:
+            continue
+        found[pid] = _format_part(p, include_sequence=True)
+
+    missing = [pid for pid in ids if pid not in found]
+    return json.dumps({"results": found, "missing": missing}, indent=2)
+
+
+@mcp.tool()
 def list_part_types() -> str:
     """List all available part types and how many of each are in the database.
 
