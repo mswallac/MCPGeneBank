@@ -52,6 +52,11 @@ def _run_igem_classics() -> Generator[BioPart, None, None]:
     yield from ingest_igem_canonical()
 
 
+def _run_igem_distribution() -> Generator[BioPart, None, None]:
+    from ingestion.ingest_igem_distribution import ingest_igem_distribution
+    yield from ingest_igem_distribution()
+
+
 # E. coli-biased UniProt queries. Each is (query, cap).
 UNIPROT_QUERIES: list[tuple[str, int]] = [
     # Reviewed Swiss-Prot entries for E. coli (organism_id 562)
@@ -114,9 +119,10 @@ def main() -> None:
     console.print(f"[bold]Starting clean ingestion into Qdrant (currently {store.count()} parts)[/bold]")
 
     sources: list[tuple[str, callable]] = [
-        ("Cello UCF",         _run_cello),
-        ("iGEM classics",     _run_igem_classics),
-        ("UniProt reviewed",  lambda: _run_uniprot(args.uniprot)),
+        ("Cello UCF",          _run_cello),
+        ("iGEM classics",      _run_igem_classics),
+        ("iGEM distribution",  _run_igem_distribution),
+        ("UniProt reviewed",   lambda: _run_uniprot(args.uniprot)),
     ]
 
     summary = Table(title="Ingestion Summary")
