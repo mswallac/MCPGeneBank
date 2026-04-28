@@ -109,14 +109,34 @@ class VectorStore:
         part_type: str | None = None,
         score_threshold: float = 0.0,
     ) -> list[dict]:
-        vec = embed_text(query)
-
         query_filter = None
         if part_type:
             query_filter = Filter(
                 must=[FieldCondition(key="type", match=MatchValue(value=part_type))]
             )
 
+        # Exact-ID fast path. Part IDs (BBa_*, P*****, cello-*, igem-dist-*)
+        # are short literal strings that don't embed well, so if the query
+        # looks like any of our accession formats we look it up directly and
+        # prepend the result to the vector-search output. Gives the LLM
+        # reliable hits for canonical IDs without relying on similarity.
+        import re
+        q = (query or "").strip()
+        id_like = bool(re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_\-]{1,40}", q))
+        exact_hits: list[dict] = []
+        if id_like:
+            try:
+                pts, _ = self.client.scroll(
+                    collection_name=self.collection,
+                    scroll_filter=Filter(must=[FieldCondition(key="part_id", match=MatchValue(value=q))]),
+                    limit=1, with_payload=True,
+                )
+                if pts and (part_type is None or pts[0].payload.get("type") == part_type):
+                    exact_hits.append({**pts[0].payload, "score": 1.0})
+            except Exception:
+                pass
+
+        vec = embed_text(query)
         results = self.client.query_points(
             collection_name=self.collection,
             query=vec,
@@ -124,11 +144,12 @@ class VectorStore:
             limit=limit,
             score_threshold=score_threshold,
         )
+        vector_hits = [{**hit.payload, "score": hit.score} for hit in results.points]
 
-        return [
-            {**hit.payload, "score": hit.score}
-            for hit in results.points
-        ]
+        # Dedupe — exact hit wins if it appears in the vector results too.
+        seen = {h["part_id"] for h in exact_hits}
+        merged = exact_hits + [h for h in vector_hits if h.get("part_id") not in seen]
+        return merged[:limit]
 
     def search_by_type(self, query: str, part_type: str, limit: int = 5) -> list[dict]:
         return self.search(query, limit=limit, part_type=part_type)
